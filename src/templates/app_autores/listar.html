@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Listado de autores
+{% endblock titulo %}
+
+
+{% block contenido %}
+<h3>Listado de autores {% if "inactivos" in request.path %} inactivos {% else %} activos{% endif %}</h3>
+<hr>
+<table class="table table-striped">
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre y Apellido</th>
+          <th scope="col" style="text-align: center">Nacionalidad</th>
+          <th scope="col" style="text-align: center">Fecha de Nacimiento</th>
+          <th scope="col" style="text-align: center">Fecha de Fallecimiento</th>
+          <th scope="col" style="text-align: center">Activo</th>
+          <th scope="col" style="text-align: center">Creado</th>
+          <th scope="col" style="text-align: center">Modificado</th>
+          <th scope="col" style="text-align: center">Acciones</th>
+        </tr>
+      </thead>
+    <tbody>
+    {% for autor in autores%}
+        <tr>
+            <td align="center">{{autor.id}}</td>
+            <td>{{autor.nombre}}</td>
+            <td align="center">{{autor.nacionalidad}}</td>
+            <td align="center">{{autor.fecha_nacimiento}}</td>
+
+            {% if  autor.fecha_fallecimiento != None %}
+                <td align="center">{{autor.fecha_fallecimiento}}</td>
+            {% else %}
+                <td align="center"></td>
+            {% endif %}
+
+            <td align="center">
+            <a href="{% url 'app_autores:modificar_activo' autor.id %}">
+            {% if autor.activo %}
+                <img src="{% static 'img/comprobado.png' %}" alt="SI" width="32px">
+            {% else %}
+                <img src="{% static 'img/cancelar.png' %}" alt='NO' width="32px">
+            {% endif %}
+            </a>
+            </td>
+
+            <td align="center">Hace {{autor.creado | timesince}}</td>
+            <td align="center">Hace {{autor.modificado | timesince}}</td>
+
+            <td align="center">
+                <a href="{% url 'app_autores:detalle' autor.id %}">
+                    <img src="{% static 'img/detalle.png' %}" width="24px" title="Detalles">
+                </a>
+                &nbsp;
+                <a href="{% url 'app_autores:borrar_autor' autor.id %}">
+                    <img src="{% static 'img/borrar.png' %}" width="24px" title="Eliminar Registro">
+                </a>
+            </td>
+        </tr>
+    {%endfor%}
+    </tbody>
+</table>
+
+{% endblock contenido %}

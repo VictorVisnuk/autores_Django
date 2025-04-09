@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Detalle de {{autor.nombre}}
+{% endblock titulo %}
+
+
+{% block contenido %}
+<h3>  Detalle de {{autor.nombre}}</h3>
+<hr>
+<div class="d-flex justify-content-center">
+  <div class="card" style="width: 30rem; margin-bottom:20px;">
+      <div class="card-body">
+          <h5 class="card-title">{{autor.nombre}}</h5>
+          <ul>
+            <li>Nacionalidad: {{autor.nacionalidad}}</li>
+            <li>Fecha de Nacimiento: {{autor.fecha_nacimiento}}</li>
+            {% if  autor.fecha_fallecimiento != None%}
+                <li>Fecha de Fallecimiento:  {{autor.fecha_fallecimiento}} </li>
+            {% endif %}
+            <li>Creado: {{autor.creado}}</li>
+            <li>Modificado {{autor.modificado}}</li>
+        </ul>
+        <div class="d-flex justify-content-center">
+          <img src =" {% static 'img/autor.png' %} " width="80%" title="Ir al detalle">
+        </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="d-grid gap-2">
+  <a class="btn btn-primary" role="button" href="
+                                                {% if  autor.activo%}
+                                                    {% url 'app_autores:listar_autores_activos'%}
+                                                {% else %}
+                                                    {% url 'app_autores:listar_autores_inactivos'%}
+                                                {% endif %} ">
+                                                Volver a la lista
+    </a>
+</div>
+
+<div class="d-grid gap-2 my-1">
+    <a class="btn btn-secondary" role="button" href=" {% url 'app_autores:presentacion'%}"> Volver al inicio </a>
+  </div>
+
+{% endblock contenido %}

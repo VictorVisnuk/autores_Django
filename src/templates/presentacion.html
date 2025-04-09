@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Proyecto Autores
+{% endblock titulo %}
+
+
+{% block contenido %}
+<h1>Proyecto Autores</h1>
+
+<p>Este proyecto consiste en una solucion Django que permite cargar autores de frases celebres, mostrarlos y manipularlos en
+    pantalla de diferentes formas.
+</p>
+<ul>
+    <li>Autor: Visñuk Victor</li>
+    <li>Programa de Aceleracion Tech - Alkemy/CFI/Gobierno de Tierra del Fuego</li>
+</ul>
+<div class="d-flex justify-content-center">
+    <img src =" {% static 'img/presentacion.jpeg' %} " alt="Presentación">
+</div>
+
+{% endblock contenido %}
