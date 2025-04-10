@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block titulo %}Listado de Frases{% endblock titulo %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-md-9">
+        <h3>Listado de frases {% if "invisibles" in request.path %} no visibles {% elif "visibles" in request.path %} visibles {% else %} {% endif %}</h3>
+    </div>
+    <div class="col-md-3">
+        <div class="d-grid gap-2 my-1">
+            <a class="btn btn-success" role="button" href=" {% url 'app_frases:crear'%}"> + Agregar Frase </a>
+        </div>
+    </div>
+</div>
+<hr>
+
+
+<div id="carouselText" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for frase in lista_frases %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="d-block w-100 text-center p-5 bg-light">
+                    <h3>{{ frase.frase }}</h3>
+                    <h4>{{ frase.autor }}</h4>
+                    <a href="{% url 'app_frases:modificar' frase.id %}">
+                        <button type="button" class="btn btn-warning">Modificar</button>
+                    </a>
+                    
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselText" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" style="background-color: rgba(0,0,0,0.5);" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselText" data-bs-slide="next">
+      <span class="carousel-control-next-icon" style="background-color: rgba(0,0,0,0.5);" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+  
+
+
+
+{% endblock contenido %}
+

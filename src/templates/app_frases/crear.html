@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block titulo %}Crear{% endblock titulo %}
+
+{% block contenido %}
+
+<form method="post"> {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Guardar" class="btn btn-success">
+    <a class="btn btn-secondary" role="button" href=" {% url 'app_frases:listar'%}"> Cancelar </a>
+</form>
+
+{% endblock contenido %}

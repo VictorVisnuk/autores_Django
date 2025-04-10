@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.core import serializers
 from django.http import JsonResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import  CreateView, UpdateView
 from .models import Autores
 
 # Create your views here.
@@ -66,5 +67,19 @@ def modificar_activo(request, id):
     if activo:
         return HttpResponseRedirect(reverse('app_autores:listar_autores_activos'))
     else:
-        return HttpResponseRedirect(reverse('app_autores:listar_autores_inactivos'))    
+        return HttpResponseRedirect(reverse('app_autores:listar_autores_inactivos'))
+    
+
+class AutoresCreateView(CreateView):
+    model = Autores
+    fields = "__all__"
+    success_url = reverse_lazy("app_autores:listar_autores")
+    template_name = "app_frases/crear.html"
+    
+    
+class AutoresUpdateView(UpdateView):
+    model = Autores
+    fields = "__all__"
+    success_url = reverse_lazy("app_autores:listar_autores")
+    template_name = "app_frases/crear.html"  
     

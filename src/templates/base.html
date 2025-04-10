@@ -36,6 +36,18 @@
                 <li><a class="dropdown-item" href="{% url 'app_autores:listar_json' %}" target="_blank" >Todos (JSON)</a></li>
               </ul>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Frases
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'app_frases:listar' %}">Todas</a></li>
+                <li><a class="dropdown-item" href="{% url 'app_frases:listar_visibles' %}">Visibles</a></li>
+                <li><a class="dropdown-item" href="{% url 'app_frases:listar_invisibles' %}">Invisibles</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'app_frases:listar_json' %}" target="_blank" >Todos (JSON)</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

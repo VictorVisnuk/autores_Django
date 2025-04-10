@@ -56,7 +56,7 @@ class Autores(models.Model):
 
     
     def __str__(self):
-        return F"[{self.id}] {self.nombre.upper()} ({self.nacionalidad})"
+        return F"{self.nombre.upper()} ({self.nacionalidad})"
     
     class Meta:
         ordering = ['id']

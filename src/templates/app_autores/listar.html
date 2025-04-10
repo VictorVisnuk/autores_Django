@@ -7,7 +7,19 @@
 
 
 {% block contenido %}
-<h3>Listado de autores {% if "inactivos" in request.path %} inactivos {% else %} activos{% endif %}</h3>
+<div class="row">
+    <div class="col-md-9">
+        <h3>Listado de autores {% if "inactivos" in request.path %} inactivos {% elif "activos" in request.path %} activos {% else %} {% endif %}</h3>
+    </div>
+    <div class="col-md-3">
+        <div class="d-grid gap-2 my-1">
+            <a class="btn btn-success" role="button" href=" {% url 'app_autores:crear'%}"> + Agregar Autor </a>
+        </div>
+    </div>
+</div>
+
+
+
 <hr>
 <table class="table table-striped">
     <thead>
@@ -51,8 +63,16 @@
             <td align="center">Hace {{autor.modificado | timesince}}</td>
 
             <td align="center">
+                <a href="{% url 'app_frases:listar_autor' autor.id %}">
+                    <img src="{% static 'img/frases.png' %}" width="24px" title="Listado de Frases del autor">
+                </a>
+                &nbsp;
                 <a href="{% url 'app_autores:detalle' autor.id %}">
                     <img src="{% static 'img/detalle.png' %}" width="24px" title="Detalles">
+                </a>
+                &nbsp;
+                <a href="{% url 'app_autores:modificar' autor.id %}">
+                    <img src="{% static 'img/editar.png' %}" width="24px" title="Editar">
                 </a>
                 &nbsp;
                 <a href="{% url 'app_autores:borrar_autor' autor.id %}">

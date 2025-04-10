@@ -21,6 +21,7 @@
             {% endif %}
             <li>Creado: {{autor.creado}}</li>
             <li>Modificado {{autor.modificado}}</li>
+            <li>Numero de frases {{autor.frases.count}}</li>
         </ul>
         <div class="d-flex justify-content-center">
           <img src =" {% static 'img/autor.png' %} " width="80%" title="Ir al detalle">

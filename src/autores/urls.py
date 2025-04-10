@@ -24,4 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('autores/', include('app_autores.urls', namespace='app_autores')),
     path('', lambda request: redirect('app_autores:presentacion')),
+    path('frases/', include('app_frases.urls', namespace='app_frases')),
 ]
