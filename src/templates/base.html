@@ -49,6 +49,20 @@
               </ul>
             </li>
           </ul>
+          <div class="d-flex ms-auto">
+            {% if request.user.is_authenticated %}
+              <span class="navbar-text me-3">
+                Usuario: {{ request.user.username }}
+              </span>
+              <form method="post" action="{% url 'app_auth:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">Logout</button>
+              </form>
+      
+            {% else %}
+              <a class="btn btn-outline-primary" href="{% url 'app_auth:login' %}">Login</a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </nav>

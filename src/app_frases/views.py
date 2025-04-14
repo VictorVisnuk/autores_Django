@@ -4,31 +4,32 @@ from django.core import serializers
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.shortcuts import get_list_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Frases
 # Create your views here.
 
-class FrasesListView(ListView):
+class FrasesListView(LoginRequiredMixin, ListView):
     #model = Frases
     queryset = Frases.objects.all()
     template_name = "app_frases/listar.html"    
     context_object_name = "lista_frases"
     
 
-class FrasesVisiblesListView(ListView):
+class FrasesVisiblesListView(LoginRequiredMixin, ListView):
     #model = Frases
     queryset = Frases.objects.filter(visible = True)
     template_name = "app_frases/listar.html"    
     context_object_name = "lista_frases"
     
 
-class FrasesInvisiblesListView(ListView):
+class FrasesInvisiblesListView(LoginRequiredMixin, ListView):
     #model = Frases
     queryset = Frases.objects.filter(visible = False)
     template_name = "app_frases/listar.html"    
     context_object_name = "lista_frases"
     
 
-class FrasesAutorListView(ListView):
+class FrasesAutorListView(LoginRequiredMixin, ListView):
     model = Frases
     template_name = "app_frases/listar.html"    
     context_object_name = "lista_frases"
@@ -38,21 +39,21 @@ class FrasesAutorListView(ListView):
         return Frases.objects.filter(autor=id_autor)
 
 
-class FrasesCreateView(CreateView):
+class FrasesCreateView(LoginRequiredMixin, CreateView):
     model = Frases
     fields = "__all__"
     success_url = reverse_lazy("app_frases:listar")
     template_name = "app_frases/crear.html"
     
     
-class FrasesUpdateView(UpdateView):
+class FrasesUpdateView(LoginRequiredMixin, UpdateView):
     model = Frases
     fields = "__all__"
     success_url = reverse_lazy("app_frases:listar")
     template_name = "app_frases/crear.html"
     
 
-class FrasesDeleteView(DeleteView):
+class FrasesDeleteView(LoginRequiredMixin, DeleteView):
     model = Frases
     success_url = reverse_lazy("app_frases:listar")
     template_name = "app_frases/borrar.html"

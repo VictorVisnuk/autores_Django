@@ -21,8 +21,9 @@ from django.shortcuts import redirect
 app_name = "app_autores"
 
 urlpatterns = [
+    path('', lambda request: redirect('app_auth:login')),
+    path('', include('app_auth.urls', namespace='app_auth')),
     path('admin/', admin.site.urls),
     path('autores/', include('app_autores.urls', namespace='app_autores')),
-    path('', lambda request: redirect('app_autores:presentacion')),
     path('frases/', include('app_frases.urls', namespace='app_frases')),
 ]
